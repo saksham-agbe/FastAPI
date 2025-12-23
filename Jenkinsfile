@@ -29,7 +29,7 @@ pipeline {
 
     post {
         success {
-            echo " FastAPI deployed successfully"
+            echo "Deployed successfully"
         }
         failure {
             echo " Deployment failed"
