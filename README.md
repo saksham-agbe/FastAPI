@@ -120,3 +120,4 @@ uvicorn main:app --reload (Runs the server on default port i.e 8000)
 #### To use a custom port
 
 uvicorn main:app --port 9000 --reload
+echo "# test auto trigger" 
