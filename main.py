@@ -17,7 +17,7 @@ app.include_router(router, prefix="/api")
 def read_root():
     return {
         "success": True,
-        "message": "Welcome to the Test App"
+        "message": "Welcome to the Test Application"
     }
 
 if __name__ == "__main__":
