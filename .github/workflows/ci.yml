@@ -22,6 +22,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+      - name: Debug Jenkins URL
+        run: |
+          echo "URL='${{ secrets.JENKINS_URL }}'"
+          echo "Length: ${#JENKINS_URL}"
+        env:
+          JENKINS_URL: ${{ secrets.JENKINS_URL }}
+
+
       - name: Trigger Jenkins Build
         run: |
           curl --fail --show-error \
