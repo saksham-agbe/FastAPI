@@ -28,7 +28,7 @@ jobs:
       - name: Get Jenkins Crumb
         id: crumb
         run: |
-          CRUMB=$(curl -s -u "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_TOKEN }}" \
+          CRUMB=$(curl -s -f -u "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_TOKEN }}" \
             "${{ secrets.JENKINS_URL }}/crumbIssuer/api/json" | jq -r .crumb)
 
           if [ -z "$CRUMB" ] || [ "$CRUMB" = "null" ]; then
