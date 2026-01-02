@@ -24,6 +24,6 @@ jobs:
     steps:
       - name: Trigger Jenkins Job
         run: |
-          curl -X POST \
+          curl -L --location-trusted -X POST \
             -u "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_TOKEN }}" \
             "${{ secrets.JENKINS_URL }}/job/FastAPI/build"
