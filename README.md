@@ -121,4 +121,3 @@ uvicorn main:app --reload (Runs the server on default port i.e 8000)
 
 uvicorn main:app --port 9000 --reload
 echo "# test auto trigger"
-sssh,github,actions
