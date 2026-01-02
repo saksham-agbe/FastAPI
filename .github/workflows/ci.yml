@@ -22,21 +22,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
-      - name: Install jq
-        run: sudo apt-get update && sudo apt-get install -y jq
-
-      - name: Trigger Jenkins Build (with crumb)
+      - name: Trigger Jenkins Build
         run: |
-          CRUMB_JSON=$(curl -s \
-            -u "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_TOKEN }}" \
-            -H "Accept: application/json" \
-            "${{ secrets.JENKINS_URL }}/crumbIssuer/api/json")
-
-          CRUMB_FIELD=$(echo "$CRUMB_JSON" | jq -r .crumbRequestField)
-          CRUMB_VALUE=$(echo "$CRUMB_JSON" | jq -r .crumb)
-
           curl -X POST \
-            -u "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_TOKEN }}" \
-            -H "$CRUMB_FIELD: $CRUMB_VALUE" \
-            "${{ secrets.JENKINS_URL }}/job/FastAPI/build"
+            "${{ secrets.JENKINS_URL }}/job/FastAPI/build?token=${{ secrets.JENKINS_JOB_TOKEN }}"
