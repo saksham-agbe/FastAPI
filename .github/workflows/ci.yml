@@ -24,5 +24,6 @@ jobs:
     steps:
       - name: Trigger Jenkins Build
         run: |
-          curl -X POST \
+          curl --fail --show-error \
+            -X POST \
             "${{ secrets.JENKINS_URL }}/job/FastAPI/build?token=${{ secrets.JENKINS_JOB_TOKEN }}"
