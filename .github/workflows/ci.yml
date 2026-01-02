@@ -22,8 +22,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Debug Jenkins token
+        run: |
+          echo "JENKINS_USER is set: ${JENKINS_USER:+yes}"
+          echo "JENKINS_TOKEN length: ${#JENKINS_TOKEN}"
+        env:
+          JENKINS_USER: ${{ secrets.JENKINS_USER }}
+          JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
+
       - name: Trigger Jenkins Job
         run: |
-          curl -L --location-trusted -X POST \
+          curl -v -X POST \
             -u "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_TOKEN }}" \
             "${{ secrets.JENKINS_URL }}/job/FastAPI/build"
