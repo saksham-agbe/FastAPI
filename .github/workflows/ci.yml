@@ -22,8 +22,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Trigger Jenkins Job
+
+      - name: Debug Jenkins URL
         run: |
-          curl -X POST \
-            -u "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_TOKEN }}" \
+          echo "URL='${{ secrets.JENKINS_URL }}'"
+          echo "Length: ${#JENKINS_URL}"
+        env:
+          JENKINS_URL: ${{ secrets.JENKINS_URL }}
+
+
+      - name: Trigger Jenkins Build
+        run: |
+          curl --fail --show-error \
+            -X POST \
+            --data "token=${{ secrets.JENKINS_JOB_TOKEN }}" \
             "${{ secrets.JENKINS_URL }}/job/FastAPI/build"
